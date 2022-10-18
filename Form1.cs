@@ -63,6 +63,30 @@ namespace DijkstraAlgorithm
             }
         }
 
+        private void buttonDijkstra_Click(object sender, EventArgs e)
+        {
+            if(comboBoxOriginVertex.SelectedIndex == -1 && comboBoxDestinationVertex.SelectedIndex == -1) {
+                MessageBox.Show("Debes seleccionar vértices de origen y destino", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Vertex origin = (Vertex)comboBoxOriginVertex.SelectedItem;
+            Vertex destination = (Vertex)comboBoxDestinationVertex.SelectedItem;
+
+            List<DijkstraElement> VD = graph.dijkstra(graph.getIndex(origin));
+            List<Edge> shortestPath = new List<Edge>();
+
+            while(destination != origin)
+                for(int i=0; i<VD.Count; i++)
+                    if(VD[i].Vertex == destination) {
+                        shortestPath.Add(destination.getEdge(VD[i].ComimgFrom));
+                        destination = VD[i].ComimgFrom;
+                        break;
+                    }
+
+            drawDijkstra(shortestPath, bmpDijkstra);
+        }
+
 
         // ************* reset Bitmap *************
         Bitmap resetBmp()
@@ -117,6 +141,23 @@ namespace DijkstraAlgorithm
             foreach (Vertex v in graph.Vertices)
                 for (int i = 0; i < v.Edges.Count; i++)
                     g.DrawLine(p, v.Position, v.getDestinationAt(i).Position);
+        }
+
+        void drawDijkstra(List<Edge> shortestPath, Bitmap bmp)
+        {
+            drawEdges(bmp);
+
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Green, 4);
+
+            foreach (Edge edge in shortestPath)
+                g.DrawLine(p, edge.Origin.Position, edge.Destination.Position);
+
+            drawVertices(bmp);
+            drawIds(bmp);
+
+            pictureBox.Image = bmp;
+            pictureBox.Refresh();
         }
 
 

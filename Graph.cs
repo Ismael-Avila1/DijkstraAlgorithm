@@ -30,6 +30,14 @@ namespace DijkstraAlgorithm
             get { return vertices; }
         }
 
+        public int getIndex(Vertex v)
+        {
+            for(int i = 0; i < VertexCount; i++)
+                if(vertices[i] == v)
+                    return i;
+            return -1;
+        }
+
 
 
         // ************* Kruskal *************

@@ -217,6 +217,7 @@
             this.buttonDijkstra.TabIndex = 7;
             this.buttonDijkstra.Text = "Mostrar Camino Más Corto";
             this.buttonDijkstra.UseVisualStyleBackColor = false;
+            this.buttonDijkstra.Click += new System.EventHandler(this.buttonDijkstra_Click);
             // 
             // groupBox3
             // 

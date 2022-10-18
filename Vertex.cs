@@ -46,6 +46,14 @@ namespace DijkstraAlgorithm
             return edges[pos].Destination;
         }
 
+        public Edge getEdge(Vertex destination)
+        {
+            foreach(Edge edge in edges)
+                if(edge.Destination == destination)
+                    return edge;
+            return null;
+        }
+
 
         public override string ToString()
         {
