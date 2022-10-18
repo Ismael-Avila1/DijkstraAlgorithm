@@ -65,7 +65,7 @@ namespace DijkstraAlgorithm
 
         private void buttonDijkstra_Click(object sender, EventArgs e)
         {
-            if(comboBoxOriginVertex.SelectedIndex == -1 && comboBoxDestinationVertex.SelectedIndex == -1) {
+            if(comboBoxOriginVertex.SelectedIndex == -1 || comboBoxDestinationVertex.SelectedIndex == -1) {
                 MessageBox.Show("Debes seleccionar vértices de origen y destino", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -145,6 +145,11 @@ namespace DijkstraAlgorithm
 
         void drawDijkstra(List<Edge> shortestPath, Bitmap bmp)
         {
+            using (Graphics grp = Graphics.FromImage(bmp))
+            {
+                grp.FillRectangle(Brushes.White, 0, 0, bmp.Width, bmp.Height);
+            }
+
             drawEdges(bmp);
 
             Graphics g = Graphics.FromImage(bmp);
