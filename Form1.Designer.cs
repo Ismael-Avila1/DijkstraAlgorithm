@@ -235,6 +235,7 @@
             // 
             // comboBoxDestinationVertex
             // 
+            this.comboBoxDestinationVertex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDestinationVertex.FormattingEnabled = true;
             this.comboBoxDestinationVertex.Location = new System.Drawing.Point(448, 57);
             this.comboBoxDestinationVertex.Name = "comboBoxDestinationVertex";
@@ -243,11 +244,13 @@
             // 
             // comboBoxOriginVertex
             // 
+            this.comboBoxOriginVertex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOriginVertex.FormattingEnabled = true;
             this.comboBoxOriginVertex.Location = new System.Drawing.Point(111, 57);
             this.comboBoxOriginVertex.Name = "comboBoxOriginVertex";
             this.comboBoxOriginVertex.Size = new System.Drawing.Size(260, 32);
             this.comboBoxOriginVertex.TabIndex = 10;
+            this.comboBoxOriginVertex.SelectedIndexChanged += new System.EventHandler(this.comboBoxOriginVertex_SelectedIndexChanged);
             // 
             // label2
             // 

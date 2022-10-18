@@ -57,6 +57,8 @@ namespace DijkstraAlgorithm
                 fillTreeView();
                 showListViewGraph();
 
+                fillComboBoxOrigin();
+
                 groupBox3.Enabled = true;
             }
         }
@@ -143,6 +145,26 @@ namespace DijkstraAlgorithm
             foreach(Vertex v_o in graph.Vertices)
                 foreach(Edge e in v_o.Edges)
                     listViewGraph.Items.Add(new ListViewItem(new String[] { e.Origin.Id.ToString(), e.Destination.Id.ToString(), e.Weight.ToString() }));
+        }
+
+
+
+        // ************* ComboBox *************
+        void fillComboBoxOrigin()
+        {
+            comboBoxOriginVertex.Items.Clear();
+
+            foreach(Vertex v in graph.Vertices)
+                comboBoxOriginVertex.Items.Add(v);
+        }
+
+        private void comboBoxOriginVertex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxDestinationVertex.Items.Clear();
+
+            foreach(Vertex v in graph.Vertices)
+                if(v != comboBoxOriginVertex.SelectedItem)
+                    comboBoxDestinationVertex.Items.Add(v);
         }
 
 
@@ -253,5 +275,7 @@ namespace DijkstraAlgorithm
                         if (existEdge(getPath(v_o, v_d), bmpOriginal))
                             v_o.addEdge(v_o, v_d);
         }
+
+        
     }
 }
