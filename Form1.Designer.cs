@@ -37,6 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.listViewGraph = new System.Windows.Forms.ListView();
+            this.columnHeaderOrigin = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderDestination = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderWeight = new System.Windows.Forms.ColumnHeader();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treeView = new System.Windows.Forms.TreeView();
             this.buttonDijkstra = new System.Windows.Forms.Button();
@@ -55,12 +58,14 @@
             // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.Color.White;
+            this.pictureBox.Enabled = false;
             this.pictureBox.Location = new System.Drawing.Point(12, 12);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(700, 700);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseClick);
             // 
             // labelRemainingVertices
             // 
@@ -107,6 +112,7 @@
             this.buttonCreateVertices.TabIndex = 2;
             this.buttonCreateVertices.Text = "Añadir Vértices";
             this.buttonCreateVertices.UseVisualStyleBackColor = false;
+            this.buttonCreateVertices.Click += new System.EventHandler(this.buttonCreateVertices_Click);
             // 
             // numericUpDownVerticesNumber
             // 
@@ -152,12 +158,32 @@
             // 
             // listViewGraph
             // 
+            this.listViewGraph.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderOrigin,
+            this.columnHeaderDestination,
+            this.columnHeaderWeight});
             this.listViewGraph.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listViewGraph.Location = new System.Drawing.Point(731, 369);
             this.listViewGraph.Name = "listViewGraph";
-            this.listViewGraph.Size = new System.Drawing.Size(539, 121);
+            this.listViewGraph.Size = new System.Drawing.Size(539, 141);
             this.listViewGraph.TabIndex = 5;
             this.listViewGraph.UseCompatibleStateImageBehavior = false;
+            this.listViewGraph.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeaderOrigin
+            // 
+            this.columnHeaderOrigin.Text = "Origen";
+            this.columnHeaderOrigin.Width = 180;
+            // 
+            // columnHeaderDestination
+            // 
+            this.columnHeaderDestination.Text = "Destino";
+            this.columnHeaderDestination.Width = 180;
+            // 
+            // columnHeaderWeight
+            // 
+            this.columnHeaderWeight.Text = "Distancia";
+            this.columnHeaderWeight.Width = 180;
             // 
             // groupBox2
             // 
@@ -165,7 +191,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(1276, 93);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(284, 397);
+            this.groupBox2.Size = new System.Drawing.Size(284, 417);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Visualización del Grafo";
@@ -177,7 +203,7 @@
             this.treeView.ForeColor = System.Drawing.Color.LavenderBlush;
             this.treeView.Location = new System.Drawing.Point(6, 26);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(272, 365);
+            this.treeView.Size = new System.Drawing.Size(272, 385);
             this.treeView.TabIndex = 0;
             // 
             // buttonDijkstra
@@ -287,5 +313,8 @@
         private ComboBox comboBoxOriginVertex;
         private Label label2;
         private Label label1;
+        private ColumnHeader columnHeaderOrigin;
+        private ColumnHeader columnHeaderDestination;
+        private ColumnHeader columnHeaderWeight;
     }
 }
