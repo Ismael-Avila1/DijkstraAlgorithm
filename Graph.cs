@@ -116,5 +116,85 @@ namespace DijkstraAlgorithm
         }
 
 
+
+        // ************* Dijkstra *************
+
+        public List<DijkstraElement> dijkstra(int origin)
+        {
+            List<DijkstraElement> VD = initializeDijkstraVector(origin);
+            int minorIndex;
+
+            while(!solution(VD)) {
+                minorIndex = select(VD);
+
+                if(minorIndex == -1)
+                    continue;
+
+                updateDijkstraElements(VD, minorIndex);
+            }
+
+            return VD;
+        }
+
+        List<DijkstraElement> initializeDijkstraVector(int origin)
+        {
+            List<DijkstraElement> VD = new List<DijkstraElement>();
+
+            for (int i = 0; i < VertexCount; i++)
+                VD.Add(new DijkstraElement(false, float.MaxValue, null, vertices[i]));
+
+            VD[origin].AccumulatedWeight = 0;
+
+            return VD;
+        }
+
+        bool solution(List<DijkstraElement> VD)
+        {
+            for(int i=0; i<VD.Count; i++)
+                if(!VD[i].Definitive)
+                    return false;
+            return true;
+        }
+
+        int select(List<DijkstraElement> VD)
+        {
+            int minorIndex = -1;
+            float minor = float.MaxValue;
+
+            for(int i=0; i<VD.Count; i++)
+                if(!VD[i].Definitive)
+                    if(VD[i].AccumulatedWeight < minor) {
+                        minor = VD[i].AccumulatedWeight;
+                        minorIndex = i;
+                    }
+            if(minorIndex == -1) {
+                for(int i=0; i<VD.Count; i++)
+                    if(VD[i].AccumulatedWeight == float.MaxValue) {
+                        VD.RemoveAt(i);
+                        return -1;
+                    }
+            }
+
+            VD[minorIndex].Definitive = true;
+            return minorIndex;
+        }
+
+        void updateDijkstraElements(List<DijkstraElement> VD, int minorIndex)
+        {
+            float weight_i, actualWeight = VD[minorIndex].AccumulatedWeight;
+            Vertex v_d, v = vertices[minorIndex];
+
+            for(int i=0; i<v.Edges.Count; i++) {
+                weight_i = actualWeight + v.Edges[i].Weight;
+                v_d = v.Edges[i].Destination;
+
+                if(VD[v_d.Id - 1].AccumulatedWeight > weight_i) {
+                    VD[v_d.Id - 1].AccumulatedWeight = weight_i;
+                    VD[v_d.Id - 1].ComimgFrom = v;
+                }
+            }
+        }
+
+
     }
 }
